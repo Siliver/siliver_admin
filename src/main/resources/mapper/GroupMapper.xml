@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siliver.admin.dao.GroupMapper">
+
+    <select id="getGroupsByUser" resultType="com.siliver.admin.dto.GroupDto">
+        SELECT tg.id,tg.group_code,tg.group_name
+        FROM t_group tg
+        INNER JOIN t_user_group tug ON tug.user_id=tg.id
+        <where>
+            tg.delete_flag=0 AND tug.delete_flag=0
+            <if test=" userIds!=NULL and userIds!='' ">
+                AND tug.user_id IN
+                <foreach collection="userIds" item="userId" open="(" separator="," close=")">
+                    #{userId}
+                </foreach>
+            </if>
+        </where>
+    </select>
+
+    <select id="getGroupUserListMapper" resultType="com.siliver.admin.response.GroupUserListResponse">
+        SELECT tu.id AS userId, tu.username AS userCode, tue.nick_name AS userName, tug.id AS relationId
+        FROM t_user tu
+                 LEFT JOIN t_user_extend tue ON tue.user_id = tu.id
+                 LEFT JOIN t_user_group tug ON tug.user_id = tu.id
+        WHERE tu.delete_flag = 0
+          AND tug.delete_flag = 0
+          AND tug.group_id = #{groupId}
+    </select>
+
+</mapper>

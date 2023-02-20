@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siliver.admin.dao.RoleMapper">
+
+    <select id="getRolesByUserAndGroup" resultType="com.siliver.admin.dto.RoleDto">
+        SELECT tr.id, tr.role_code, tr.role_name
+        FROM t_role tr
+        INNER JOIN t_group_role tgr ON tgr.role_id = tr.id
+        INNER JOIN t_group tg ON tgr.group_id=tg.id
+        INNER JOIN t_user_group tug ON tug.group_id=tg.id
+        INNER JOIN t_user tu ON tug.user_id=tu.id
+        <where>
+            tr.delete_flag = 0
+            AND tgr.delete_flag = 0
+            AND tg.delete_flag = 0
+            AND tug.delete_flag = 0
+            AND tu.delete_flag = 0
+            <if test=" userId!=null ">
+                AND tu.id = #{userId}
+            </if>
+        </where>
+    </select>
+
+    <select id="getGroupsByRoleIdMapper" resultType="com.siliver.admin.response.RoleGroupResponse">
+        SELECT tg.id AS roleId, tg.group_code AS groupCode, tg.group_name AS groupName, tgr.id AS relationId
+        FROM t_group tg
+                 LEFT JOIN t_group_role tgr ON tgr.group_id = tg.id
+        WHERE tg.delete_flag = 0
+          AND tgr.delete_flag = 0
+          AND tgr.role_id = #{roleId}
+    </select>
+
+</mapper>

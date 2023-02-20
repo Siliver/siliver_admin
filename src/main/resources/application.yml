@@ -1,0 +1,107 @@
+server:
+  port: 8999
+  http2:
+    enabled: true
+  servlet:
+    context-path: /admin_project
+spring:
+  application:
+    name: admin_project
+  cache:
+    type: redis
+    redis:
+      enable-statistics: true
+      key-prefix: springCache
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size:
+        10MB
+      max-request-size:
+        50MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    hikari:
+      connection-timeout: 30000
+      validation-timeout: 5000
+      idle-timeout: 60000
+      leak-detection-threshold: 15000
+      max-lifetime: 120000
+      minimum-idle: 1
+      maximum-pool-size: 10
+      connection-test-query: SELECT 1
+      driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    redis:
+      timeout: 300000
+      connect-timeout: 18000
+      client-type: lettuce
+      lettuce:
+        pool:
+          enabled: true
+          max-idle: 8
+          min-idle: 1
+          max-active: 8
+          max-wait: -1
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+    format:
+      date-time: yyyy-MM-dd HH:mm:ss
+  aop:
+    auto: true
+  # spring netty 的内存泄露检测
+  netty:
+    leak-detection: ADVANCED
+  # 用于数据迁移，未来配置
+  flyway:
+    enabled: true
+    fail-on-missing-locations: false
+    connect-retries: 3
+logging:
+  file:
+    name: admin.log
+    path: /log
+  charset:
+    file: UTF-8
+    console: UTF-8
+  level:
+    root: INFO
+    com:
+      siliver:
+        game: INFO
+  logback:
+    rollingpolicy:
+      total-size-cap: 80MB
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: full
+        connectTimeout: 10000
+        readTimeout: 10000
+  okhttp:
+    enabled: true
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+# 自定义权限配置
+custom:
+  security:
+    skip:
+      - /login/refresh_token
+      - /widget/ipRegion
+    # 白名单
+    white:
+      - /login/**
+      - /swagger**/**
+      - /v3/api-docs/**
+    # 动态角色配置
+    dynamic:
+      - name: test
+        url:
+          - /test/**
+
+

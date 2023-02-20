@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.siliver.admin.dao.MenuMapper">
+
+    <select id="getUserMenuMapper" resultType="com.siliver.admin.response.UserMenuResponse">
+        SELECT tm.id        AS id,
+               tm.menu_name AS menuName,
+               tm.parent_id AS parentId,
+               tm.menu_icon AS menuIcon,
+               tm.menu_url  AS menuUrl
+        FROM t_menu tm
+                 INNER JOIN t_role_menu trm on tm.id = trm.menu_id
+                 INNER JOIN t_role tr on trm.role_id = tr.id
+                 INNER JOIN t_group_role tgr on tgr.role_id = tr.id
+                 INNER JOIN t_group tg on tgr.group_id = tg.id
+                 INNER JOIN t_user_group tug on tug.group_id = tg.id
+                 INNER JOIN t_user tu on tu.id = tug.user_id
+        WHERE tm.delete_flag = 0
+          AND trm.delete_flag = 0
+          AND tr.delete_flag = 0
+          AND tgr.delete_flag = 0
+          AND tug.delete_flag = 0
+          AND tu.delete_flag = 0
+          AND tu.id = #{userId}
+    </select>
+
+    <select id="getRolesByMenuIdMapper" resultType="com.siliver.admin.response.MenuRoleListResponse">
+        SELECT tr.id AS roleId, tr.role_code AS roleCode, tr.role_name AS roleName, trm.id AS relationId
+        FROM t_role tr
+                 LEFT JOIN t_role_menu trm ON trm.role_id = tr.id
+        WHERE tr.delete_flag = 0
+          AND trm.delete_flag = 0
+          AND trm.menu_id = #{menuId}
+    </select>
+
+</mapper>
