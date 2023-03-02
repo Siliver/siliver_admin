@@ -1,9 +1,9 @@
 package com.siliver.admin.config.auth;
 
-import com.siliver.admin.config.auth.filter.JWTAuthenticationEntryPoint;
+import com.siliver.admin.config.auth.filter.JwtAuthenticationEntryPoint;
 import com.siliver.admin.config.auth.filter.JwtAuthorizationFilter;
 import com.siliver.admin.config.auth.filter.XssFilter;
-import com.siliver.admin.config.auth.interceptor.JWTAccessDeniedHandler;
+import com.siliver.admin.config.auth.interceptor.JwtAccessDeniedHandler;
 import com.siliver.admin.config.custom.CustomSecurityConfig;
 import com.siliver.admin.service.IJwtInfoService;
 import lombok.RequiredArgsConstructor;
@@ -88,9 +88,9 @@ public class SecurityConfig {
                 // 安全防护：开启xss过滤
                 .addFilterBefore(new XssFilter(), JwtAuthorizationFilter.class)
                 // 没有携带token或者token无效拦截器
-                .exceptionHandling().authenticationEntryPoint(new JWTAuthenticationEntryPoint())
+                .exceptionHandling().authenticationEntryPoint(new JwtAuthenticationEntryPoint())
                 // 添加无权限时的处理拦截器
-                .accessDeniedHandler(new JWTAccessDeniedHandler());
+                .accessDeniedHandler(new JwtAccessDeniedHandler());
         return http.build();
     }
 

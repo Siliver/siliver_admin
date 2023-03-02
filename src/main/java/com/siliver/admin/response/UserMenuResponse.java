@@ -8,6 +8,11 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 用户菜单返回实体
+ *
+ * @author siliver
+ */
 @Data
 @Schema(description = "用户菜单返回实体")
 public class UserMenuResponse implements Serializable {

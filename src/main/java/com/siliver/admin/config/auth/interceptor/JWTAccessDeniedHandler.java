@@ -9,7 +9,12 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 
 import java.io.IOException;
 
-public class JWTAccessDeniedHandler implements AccessDeniedHandler {
+/**
+ * 无权限认证节点
+ *
+ * @author siliver
+ */
+public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException {

@@ -5,6 +5,8 @@ import com.siliver.admin.model.VerifyCodeModel;
 
 /**
  * 验证码相关接口
+ *
+ * @author siliver
  */
 public interface IVerifyCodeGen {
 

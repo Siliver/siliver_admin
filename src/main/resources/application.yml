@@ -4,6 +4,14 @@ server:
     enabled: true
   servlet:
     context-path: /admin_project
+management:
+  endpoint:
+    sentinel:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 spring:
   application:
     name: admin_project
@@ -17,7 +25,7 @@ spring:
   servlet:
     multipart:
       max-file-size:
-        10MB
+        50MB
       max-request-size:
         50MB
   jackson:
@@ -58,9 +66,13 @@ spring:
     leak-detection: ADVANCED
   # 用于数据迁移，未来配置
   flyway:
-    enabled: true
+    enabled: false
     fail-on-missing-locations: false
     connect-retries: 3
+  cloud:
+    sentinel:
+      log:
+        dir: /logs/csp
 logging:
   file:
     name: admin.log
@@ -72,7 +84,7 @@ logging:
     root: INFO
     com:
       siliver:
-        game: INFO
+        admin: INFO
   logback:
     rollingpolicy:
       total-size-cap: 80MB
@@ -83,6 +95,8 @@ feign:
         loggerLevel: full
         connectTimeout: 10000
         readTimeout: 10000
+      uomgFeign:
+        loggerLevel: full
   okhttp:
     enabled: true
 mybatis:
@@ -92,7 +106,8 @@ custom:
   security:
     skip:
       - /login/refresh_token
-      - /widget/ipRegion
+      - /widget/**
+      - /file/**
     # 白名单
     white:
       - /login/**

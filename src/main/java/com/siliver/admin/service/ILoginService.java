@@ -2,10 +2,14 @@ package com.siliver.admin.service;
 
 import com.siliver.admin.common.Result;
 import com.siliver.admin.request.LoginRequest;
+import com.siliver.admin.request.WeChatLoginRequest;
 import com.siliver.admin.response.LoginResponse;
+import com.siliver.admin.response.WeChatLoginCustomResponse;
 
 /**
  * 登录抽象接口
+ *
+ * @author siliver
  */
 public interface ILoginService {
 
@@ -34,4 +38,11 @@ public interface ILoginService {
      */
     Result<Void> loginOutService(String token);
 
+    /**
+     * 小程序登录服务
+     *
+     * @param weChatLoginRequest 登录参数
+     * @return 登录结果
+     */
+    Result<WeChatLoginCustomResponse> weChatLoginService(WeChatLoginRequest weChatLoginRequest);
 }

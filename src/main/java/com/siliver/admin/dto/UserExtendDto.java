@@ -15,9 +15,9 @@ import java.time.LocalDateTime;
  * @author siliver
  */
 @Data
-@TableName("t_user")
+@TableName("t_user_extend")
 @EqualsAndHashCode(callSuper = false)
-public class UserExtendDto extends Model<DictionaryDto> {
+public class UserExtendDto extends Model<UserExtendDto> {
 
     @TableId(type = IdType.AUTO)
     private Integer id;
@@ -27,24 +27,11 @@ public class UserExtendDto extends Model<DictionaryDto> {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 
-    @TableField(value = "create_user", updateStrategy = FieldStrategy.NEVER)
-    private String createUser;
 
     @TableField(value = "update_time", insertStrategy = FieldStrategy.NEVER, updateStrategy = FieldStrategy.NEVER)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
-
-    @TableField(value = "update_user")
-    private String updateUser;
-
-    @Version
-    @TableField(value = "version")
-    private int version;
-
-    @TableLogic(value = "0", delval = "1")
-    @TableField(value = "delete_flag")
-    private int deleteFlag;
 
     @TableField(value = "nick_name")
     private String nickName;

@@ -7,7 +7,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.2</version>
+        <version>3.0.3</version>
     </parent>
 
     <groupId>com.siliver</groupId>
@@ -27,10 +27,13 @@
         <mybatis.plus.version>3.5.3.1</mybatis.plus.version>
         <redisson.spring.version>3.19.3</redisson.spring.version>
         <openfeign.version>4.0.1</openfeign.version>
-        <fastjson2.version>2.0.23</fastjson2.version>
+        <fastjson2.version>2.0.24</fastjson2.version>
         <jjwt.version>0.11.5</jjwt.version>
         <openapi.webmvc.version>2.0.2</openapi.webmvc.version>
+        <mica.ip2region>3.0.1</mica.ip2region>
         <user.agent.utils>1.21</user.agent.utils>
+        <snakeyaml>2.0</snakeyaml>
+        <commons.fileupload>1.5</commons.fileupload>
     </properties>
 
     <dependencyManagement>
@@ -62,6 +65,10 @@
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
@@ -72,6 +79,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>objenesis</artifactId>
+                    <groupId>org.objenesis</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -141,11 +154,24 @@
             <artifactId>flyway-mysql</artifactId>
         </dependency>
 
+        <!-- todo snakeyaml 问题版本升级，待引用包升级后删除 -->
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml}</version>
+        </dependency>
+
         <!-- spring独立出的项目 -->
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
             <version>${openapi.webmvc.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- 其他集成springboot集成插件 -->
@@ -158,13 +184,31 @@
             <groupId>org.redisson</groupId>
             <artifactId>redisson-spring-boot-starter</artifactId>
             <version>${redisson.spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
-        <!-- springcloud 相关 -->
+        <!-- spring-cloud 相关 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
             <version>${openfeign.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-fileupload</groupId>
+                    <artifactId>commons-fileupload</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- todo commons-fileupload 问题版本升级，待引用包升级后删除 -->
+        <dependency>
+            <groupId>commons-fileupload</groupId>
+            <artifactId>commons-fileupload</artifactId>
+            <version>${commons.fileupload}</version>
         </dependency>
 
         <!-- alibaba 相关 -->
@@ -180,11 +224,21 @@
                     <groupId>org.springframework.cloud</groupId>
                     <artifactId>spring-cloud-context</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>org.yaml</groupId>
+                    <artifactId>snakeyaml</artifactId>
+                </exclusion>
             </exclusions>
         </dependency>
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>fastjson</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- 序列化 -->
@@ -222,7 +276,7 @@
         <dependency>
             <groupId>net.dreamlu</groupId>
             <artifactId>mica-ip2region</artifactId>
-            <version>3.0.1</version>
+            <version>${mica.ip2region}</version>
         </dependency>
 
         <!-- useragent解析包 -->
@@ -231,7 +285,6 @@
             <artifactId>UserAgentUtils</artifactId>
             <version>${user.agent.utils}</version>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -251,7 +304,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
                 <!-- 启用parameters编辑选项 -->
                 <configuration>
                     <parameters>true</parameters>

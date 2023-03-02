@@ -1,14 +1,14 @@
 INSERT INTO admin_schema.t_user (create_user, update_user, username, password)
 VALUES ('admin', 'admin', 'admin', '$2a$10$ZvUjv.B5njT92KTtNhgBPu2cZflKz1mL8e.YJDhuj/YzF5qzWInO2');
 
-INSERT INTO admin_schema.t_group (create_user, update_user, group_code, group_name, super_id)
-VALUES ('admin', 'admin', 'admin', '超级管理员', 0);
+INSERT INTO admin_schema.t_group (id, create_user, update_user, group_code, group_name, super_id)
+VALUES (1, 'admin', 'admin', 'admin', '超级管理员', 0);
 
 INSERT INTO admin_schema.t_user_group (create_user, update_user, user_id, group_id)
 VALUES ('admin', 'admin', 1, 1);
 
-INSERT INTO admin_schema.t_role (create_user, update_user, role_code, role_name)
-VALUES ('admin', 'admin', 'admin', '超级管理员');
+INSERT INTO admin_schema.t_role (id, create_user, update_user, role_code, role_name)
+VALUES (1, 'admin', 'admin', 'admin', '超级管理员');
 
 INSERT INTO admin_schema.t_group_role (create_user, update_user, group_id, role_id)
 VALUES ('admin', 'admin', 1, 1);

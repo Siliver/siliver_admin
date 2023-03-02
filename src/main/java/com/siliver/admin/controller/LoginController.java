@@ -3,7 +3,9 @@ package com.siliver.admin.controller;
 import com.siliver.admin.common.Result;
 import com.siliver.admin.model.VerifyCodeModel;
 import com.siliver.admin.request.LoginRequest;
+import com.siliver.admin.request.WeChatLoginRequest;
 import com.siliver.admin.response.LoginResponse;
+import com.siliver.admin.response.WeChatLoginCustomResponse;
 import com.siliver.admin.service.ILoginService;
 import com.siliver.admin.service.IVerifyCodeGen;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,6 +22,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 
+/**
+ * 登录接口
+ *
+ * @author siliver
+ */
 @Slf4j
 @Tag(name = "LoginController", description = "登录相关")
 @RestController
@@ -42,7 +49,8 @@ public class LoginController {
      */
     @Operation(description = "用户登录接口", summary = "登录相关接口")
     @PostMapping("/login")
-    public Result<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+    public Result<LoginResponse> login(@RequestHeader(value = "X-Real-IP",required = false) String realIp, @Valid @RequestBody LoginRequest loginRequest) {
+        loginRequest.setIp(realIp);
         return loginService.loginService(loginRequest);
     }
 
@@ -97,6 +105,20 @@ public class LoginController {
         } catch (IOException e) {
             log.error("验证码获取接口输出流获取异常", e);
         }
+    }
+
+    /* 小程序相关 */
+
+    /**
+     * 微信小程序登录
+     *
+     * @param weChatLoginRequest 登录参数
+     * @return 登录结果
+     */
+    @Operation(description = "微信小程序登录", summary = "登录相关接口")
+    @PostMapping("/wechat")
+    public Result<WeChatLoginCustomResponse> weChatLogin(@RequestBody WeChatLoginRequest weChatLoginRequest) {
+        return loginService.weChatLoginService(weChatLoginRequest);
     }
 
 }

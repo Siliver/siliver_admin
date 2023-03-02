@@ -36,11 +36,13 @@ public class LoginRequest implements Serializable {
     @Schema(description = "登录类型")
     private LoginEnum loginType;
 
-    @NotBlank(message = "验证码不能为空")
     @Schema(description = "验证码")
     private String verifyCode;
 
-    @NotBlank(message = "验证码不能为空")
     @Schema(description = "验证码请求编号")
     private String requestOnce;
+
+    @Schema(description = "ip", hidden = true)
+    private String ip;
+
 }

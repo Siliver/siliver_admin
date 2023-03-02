@@ -81,3 +81,11 @@ mysql-connector-java包已经迁移到mysql-connector-j
 > 13. mica-ip2region
 
 使用mica-ip2region做了离线IP地址解析的接口小工具
+
+> 14. 微信小程序登录接口
+
+> 15. pdf,word 文档上传下载接口
+
+> 16. 娱乐
+
+对接了优启蒙的免费接口

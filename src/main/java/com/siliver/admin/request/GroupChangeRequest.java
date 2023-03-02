@@ -4,6 +4,11 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+/**
+ * 用户组维护请求参数
+ *
+ * @author siliver
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Schema(title = "GroupChangeRequest", description = "用户组维护请求参数")

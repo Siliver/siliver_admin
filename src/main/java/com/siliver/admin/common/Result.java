@@ -3,6 +3,7 @@ package com.siliver.admin.common;
 import com.siliver.admin.neum.ResultCode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,8 +14,10 @@ import java.io.Serializable;
  * 返回通用结构
  *
  * @param <T> 泛型
+ * @author siliver
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "通用返回实体")

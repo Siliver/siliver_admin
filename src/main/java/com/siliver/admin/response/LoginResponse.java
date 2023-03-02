@@ -8,6 +8,11 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * 普通登录返回实体
+ *
+ * @author siliver
+ */
 @Data
 @Schema(description = "登录返回实体")
 public class LoginResponse implements Serializable {
@@ -25,7 +30,7 @@ public class LoginResponse implements Serializable {
     private String refreshToken;
 
     @Schema(description = "登录成功：过期时间/登录失败：解锁时间")
-    private long Expiration;
+    private long expiration;
 
     @JsonIgnore
     private List<String> roles;

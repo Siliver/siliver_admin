@@ -32,4 +32,10 @@ public class LoginLogDoc implements Serializable {
 
     @Field(value = "roles", targetType = FieldType.ARRAY, order = 3)
     private List<Integer> roles;
+
+    @Field(value = "ip", order = 4)
+    private String ip;
+
+    @Field(value = "ipRegion", order = 5)
+    private String ipRegion;
 }

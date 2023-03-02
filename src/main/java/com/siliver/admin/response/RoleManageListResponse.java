@@ -9,6 +9,11 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+/**
+ * 角色管理列表实体
+ *
+ * @author siliver
+ */
 @Data
 @Schema(description = "角色管理返回列表实体对象")
 public class RoleManageListResponse implements Serializable {

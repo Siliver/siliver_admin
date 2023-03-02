@@ -40,7 +40,7 @@ public class GroupController {
     @Operation(description = "用户组列表接口", summary = "用户组相关")
     @GetMapping("/app/list")
     public Result<List<GroupListResponse>> getGroupList(
-            @Parameter(name = "groupId", in = ParameterIn.QUERY, required = true, description = "groupId：如果有，就查询其子节点；没有就查询所有") @RequestParam("groupId") Integer groupId
+            @Parameter(name = "groupId", in = ParameterIn.QUERY, description = "groupId：如果有，就查询其子节点；没有就查询所有") @RequestParam(value = "groupId", required = false) Integer groupId
     ) {
         return groupService.getGroupListService(groupId);
     }
@@ -91,7 +91,7 @@ public class GroupController {
      * @return 用户列表
      */
     @Operation(description = "用户组用户列表查询接口", summary = "用户组相关")
-    @GetMapping("/role/list")
+    @GetMapping("/user/list")
     public Result<List<GroupUserListResponse>> getGroupUserList(
             @Parameter(name = "groupId", in = ParameterIn.QUERY, required = true, description = "用户组ID") @RequestParam("groupId") int groupId
     ) {
@@ -106,7 +106,7 @@ public class GroupController {
      * @return 编辑结果
      */
     @Operation(description = "用户组用户维护接口", summary = "用户组相关")
-    @PostMapping("/role/change")
+    @PostMapping("/user/change")
     public Result<Void> changeGroupUser(
             @Parameter(name = "userCode", in = ParameterIn.HEADER, required = true, description = "操作用户名称") @RequestHeader("userCode") String userCode,
             @RequestBody GroupUserRequest groupUserRequest

@@ -11,6 +11,8 @@ import java.time.LocalDateTime;
 
 /**
  * 用户基础表
+ *
+ * @author siliver
  */
 @Data
 @TableName("t_user")
@@ -58,7 +60,6 @@ public class UserDto extends Model<UserDto> {
 
     @TableField("accountNonExpired")
     private boolean accountNonExpired;
-
 
     @TableField(value = "last_login_time", insertStrategy = FieldStrategy.NEVER)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

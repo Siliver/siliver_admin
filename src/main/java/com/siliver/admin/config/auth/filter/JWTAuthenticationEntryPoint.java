@@ -10,7 +10,12 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 
 import java.io.IOException;
 
-public class JWTAuthenticationEntryPoint implements AuthenticationEntryPoint {
+/**
+ * token验证失败节点
+ *
+ * @author siliver
+ */
+public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request,
                          HttpServletResponse response,

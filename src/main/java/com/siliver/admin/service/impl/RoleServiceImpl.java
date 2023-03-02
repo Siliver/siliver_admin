@@ -50,31 +50,20 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, RoleDto> implements
     }
 
     @Override
-    public Result<IPage<RoleListResponse>> getRoleListService(int page, int pageSize) {
-        IPage<RoleDto> page1 = new Page<>();
+    public Result<List<RoleListResponse>> getRoleListService() {
         // 拼接查询条件
         LambdaQueryWrapper<RoleDto> lambdaQueryWrapper = Wrappers.<RoleDto>lambdaQuery()
                 .select(RoleDto::getRoleCode, RoleDto::getRoleName)
                 .orderByDesc(RoleDto::getCreateTime);
-        page1 = page(page1, lambdaQueryWrapper);
-        // 进行返回值转换
-        if (Objects.isNull(page1) || CollectionUtils.isEmpty(page1.getRecords())) {
-            return Result.successBuild();
-        }
+        List<RoleDto> temp = list(lambdaQueryWrapper);
         // 进行类型转换
-        List<RoleListResponse> roleListResponses = new ArrayList<>(page1.getRecords().size());
-        page1.getRecords().forEach(t -> {
+        List<RoleListResponse> roleListResponses = new ArrayList<>(temp.size());
+        temp.forEach(t -> {
             RoleListResponse roleListResponse = new RoleListResponse();
             BeanUtils.copyProperties(t, roleListResponse);
             roleListResponses.add(roleListResponse);
         });
-        // 进行返回结构的拼接
-        IPage<RoleListResponse> page2 = new Page<>();
-        page2.setCurrent(page1.getCurrent());
-        page2.setSize(page1.getSize());
-        page2.setTotal(page1.getTotal());
-        page2.setRecords(roleListResponses);
-        return Result.successBuild(page2);
+        return Result.successBuild(roleListResponses);
     }
 
     @Override

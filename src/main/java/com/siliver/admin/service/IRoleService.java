@@ -30,11 +30,9 @@ public interface IRoleService extends IService<RoleDto> {
     /**
      * 获取角色列表
      *
-     * @param page     页码
-     * @param pageSize 页大小
      * @return 角色分页列表
      */
-    Result<IPage<RoleListResponse>> getRoleListService(int page, int pageSize);
+    Result<List<RoleListResponse>> getRoleListService();
 
 
     /**

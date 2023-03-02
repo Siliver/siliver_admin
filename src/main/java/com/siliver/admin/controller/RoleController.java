@@ -35,17 +35,12 @@ public class RoleController {
     /**
      * 获取角色列表
      *
-     * @param page     页码
-     * @param pageSize 页大小
      * @return 角色分页列表
      */
     @Operation(description = "角色列表接口", summary = "角色相关")
     @GetMapping("/app/list")
-    public Result<IPage<RoleListResponse>> getRoleList(
-            @Parameter(name = "page", in = ParameterIn.QUERY, required = true, description = "页码") @RequestParam("page") int page,
-            @Parameter(name = "pageSize", in = ParameterIn.QUERY, required = true, description = "页大小") @RequestParam("pageSize") int pageSize
-    ) {
-        return roleService.getRoleListService(page, pageSize);
+    public Result<List<RoleListResponse>> getRoleList() {
+        return roleService.getRoleListService();
     }
 
     /**

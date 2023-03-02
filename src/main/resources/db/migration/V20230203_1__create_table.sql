@@ -50,11 +50,14 @@ create table t_group
     group_name  varchar(50)                         not null comment '组名称',
     super_id    int       default 0                 not null comment '父级组编号，根节点为0',
     constraint t_group_code_index
-        unique (group_code) comment '用户编号唯一索引',
-    constraint t_group_super_index
-        unique (super_id) comment '父级索引'
+        unique (group_code) comment '用户编号唯一索引'
 )
     comment '用户组（用户部门）';
+
+
+create index t_group_super_index
+    on t_group (super_id)
+    comment '父级索引';
 
 create table t_user_group
 (

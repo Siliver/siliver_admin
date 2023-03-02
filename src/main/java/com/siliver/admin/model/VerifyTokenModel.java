@@ -8,6 +8,8 @@ import java.util.List;
 
 /**
  * token验证结果类
+ *
+ * @author siliver
  */
 @Data
 public class VerifyTokenModel implements Serializable {

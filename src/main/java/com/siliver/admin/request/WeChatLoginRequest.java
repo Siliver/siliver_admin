@@ -7,6 +7,11 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * 小程序登录请求参数
+ *
+ * @author siliver
+ */
 @Data
 @Schema(title = "WeChatLoginRequest", description = "微信登录参数的")
 public class WeChatLoginRequest implements Serializable {

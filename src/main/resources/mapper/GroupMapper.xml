@@ -6,10 +6,10 @@
     <select id="getGroupsByUser" resultType="com.siliver.admin.dto.GroupDto">
         SELECT tg.id,tg.group_code,tg.group_name
         FROM t_group tg
-        INNER JOIN t_user_group tug ON tug.user_id=tg.id
+        INNER JOIN t_user_group tug ON tug.group_id=tg.id
         <where>
             tg.delete_flag=0 AND tug.delete_flag=0
-            <if test=" userIds!=NULL and userIds!='' ">
+            <if test=" userIds!=null and userIds!='' ">
                 AND tug.user_id IN
                 <foreach collection="userIds" item="userId" open="(" separator="," close=")">
                     #{userId}

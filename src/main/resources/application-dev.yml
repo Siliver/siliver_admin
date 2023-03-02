@@ -11,9 +11,14 @@ spring:
     password: root
   cloud:
     nacos:
-      server-addr: 127.0.0.1:8848
       config:
         server-addr: 127.0.0.1:8848
+      discovery:
+        server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8081
+        port: 8719
   data:
     mongodb:
       host: 127.0.0.1
@@ -35,3 +40,14 @@ springdoc:
 logging:
   level:
     web: info
+# 自定义微信登录配置
+wechat:
+  appId: dev
+  appSecret: dev
+  grantType: authorization_code
+file:
+  prdOrWord: /upload
+  picture: /upload
+
+
+

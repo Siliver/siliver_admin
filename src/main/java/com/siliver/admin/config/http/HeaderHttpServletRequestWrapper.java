@@ -5,6 +5,11 @@ import jakarta.servlet.http.HttpServletRequestWrapper;
 
 import java.util.*;
 
+/**
+ * 请求头自定义拼接
+ *
+ * @author siliver
+ */
 public class HeaderHttpServletRequestWrapper extends HttpServletRequestWrapper {
 
     private final Map<String, String> headerMap = new HashMap<>();

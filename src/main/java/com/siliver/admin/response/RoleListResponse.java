@@ -6,6 +6,11 @@ import lombok.Data;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * 角色列表返回
+ *
+ * @author siliver
+ */
 @Data
 @Schema(description = "角色列表返回实体")
 public class RoleListResponse implements Serializable {
